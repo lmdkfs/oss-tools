@@ -1,0 +1,18 @@
+qiniu:
+  ak: FwL5HXMN0xqJinXILR8DL5xmlemUhjEBxhvJyWOQ
+  sk: odkHUcPU4HhJkVB100A69GGZPgGNuUNg7WHgTQfh 
+  bucket: newbrand-public
+  upHost: up.oss.test
+  rsfHost: rsf.oss.test
+  rsHost: rs.oss.test
+  ioVipHost: io.oss.test
+  apiHost: apiserver.oss.test
+  qiniuDomain: http://newbrand-newbrand.test.oss.test/
+  privateBucket: false
+
+ufile:
+  public_key: TOKEN_cf33b5ce-749d-42e0-9cb5-cae3c7489d12
+  private_key: 3fe4ab9a-1401-4621-aec3-27f2120669e8
+  bucket: renmai-store
+  file_host: cn-bj.ufileos.com
+  prefix: 
