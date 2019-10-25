@@ -5,6 +5,11 @@ type Config struct {
 	AccessKeyID     string
 	SecretAccessKey string
 	Secure          bool
+	FileName        string
+
+	BucketName string
+	Location   string
+	ObjectName string
 }
 
 var config *Config

@@ -26,6 +26,5 @@ func Execute() {
 var rootTest string
 
 func init() {
-	log.Println("root init")
 	rootCmd.PersistentFlags().StringVar(&rootTest, "root", "rootDefault", "aaaa")
 }
