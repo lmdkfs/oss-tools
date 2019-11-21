@@ -62,7 +62,9 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.PersistentFlags().StringP("log", "l", "oss-tools.log", "logname")
+	rootCmd.PersistentFlags().StringP("--worker", "c", "15", "worker count")
 	viper.BindPFlag("log.logname", rootCmd.PersistentFlags().Lookup("log"))
+	viper.BindPFlag("worker", rootCmd.PersistentFlags().Lookup("worker"))
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -114,6 +116,8 @@ func initConfig() {
 	globalConfig.Ufile.Prefix = viper.GetString("ufile.prefix")
 	globalConfig.Log.LogPath = viper.GetString("log.logpath")
 	globalConfig.Log.LogName = viper.GetString("log.logname")
+
+	globalConfig.Worker = viper.GetInt("worker")
 	logger := utils.NewLogger()
 	if logfile, err := os.Create(globalConfig.Log.LogPath + "/" + globalConfig.Log.LogName); err != nil {
 		logger.Panicf("Create LogFile Fail%s", err)

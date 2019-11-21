@@ -139,10 +139,10 @@ func Migrate() {
 	logger = utils.NewLogger()
 	numcpu := runtime.NumCPU()
 	runtime.GOMAXPROCS(numcpu)
-	Ch = make(chan FileInfo, 10)
+	Ch = make(chan FileInfo, 100)
 	go getFileFromQiniu(Ch, &wgp)
 	wgp.Add(1)
-	for i := 0; i < 15; i++ {
+	for i := 0; i < cfg.Worker; i++ {
 		go multiPutToUFile(Ch, &wgc)
 		wgc.Add(1)
 	}

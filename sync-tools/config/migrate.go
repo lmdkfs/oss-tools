@@ -4,6 +4,7 @@ type Config struct {
 	Qiniu Qiniu
 	Ufile Ufile
 	Log   Log
+	Worker int
 }
 
 type Log struct {
