@@ -5,6 +5,8 @@ go 1.13
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/gen2brain/go-unarr v0.0.0-20190203132630-dd30f8db8e40 // indirect
+	github.com/gogo/protobuf v1.3.1
+	github.com/golang/protobuf v1.3.1
 	github.com/magiconair/properties v1.8.1 // indirect
 	github.com/minio/minio-go/v6 v6.0.39
 	github.com/mitchellh/go-homedir v1.1.0

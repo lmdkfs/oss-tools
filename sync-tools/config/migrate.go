@@ -1,9 +1,9 @@
 package config
 
 type Config struct {
-	Qiniu Qiniu
-	Ufile Ufile
-	Log   Log
+	Qiniu  Qiniu
+	Ufile  Ufile
+	Log    Log
 	Worker int
 }
 
@@ -21,7 +21,8 @@ type Qiniu struct {
 	IoVipHost     string
 	ApiHost       string
 	QiniuDomain   string
-	PrivateBucket bool // true priviate false public
+	PrivateBucket bool   // true priviate false public
+	File          string //metadata from file
 }
 type Ufile struct {
 	PublicKey  string

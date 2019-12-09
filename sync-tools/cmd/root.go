@@ -62,9 +62,11 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.PersistentFlags().StringP("log", "l", "oss-tools.log", "logname")
-	rootCmd.PersistentFlags().StringP("--worker", "c", "15", "worker count")
+	rootCmd.PersistentFlags().StringP("worker", "c", "15", "worker count")
+	rootCmd.PersistentFlags().StringP("file", "f", "", "qiniu metadata from file")
 	viper.BindPFlag("log.logname", rootCmd.PersistentFlags().Lookup("log"))
 	viper.BindPFlag("worker", rootCmd.PersistentFlags().Lookup("worker"))
+	viper.BindPFlag("qiniu.file", rootCmd.PersistentFlags().Lookup("file"))
 }
 
 // initConfig reads in config file and ENV variables if set.
@@ -108,6 +110,7 @@ func initConfig() {
 	globalConfig.Qiniu.QiniuDomain = viper.GetString("qiniu.qiniudomain")
 	globalConfig.Qiniu.Bucket = viper.GetString("qiniu.bucket")
 	globalConfig.Qiniu.PrivateBucket = viper.GetBool("qiniu.privateBucket")
+	globalConfig.Qiniu.File = viper.GetString("qiniu.file")
 
 	globalConfig.Ufile.PrivateKey = viper.GetString("ufile.private_key")
 	globalConfig.Ufile.PublicKey = viper.GetString("ufile.public_key")

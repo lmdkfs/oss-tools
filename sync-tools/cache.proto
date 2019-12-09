@@ -1,0 +1,4 @@
+syntax = "proto3";
+message UfileCache {
+    map<string, bool> ufilecache = 1;
+}
