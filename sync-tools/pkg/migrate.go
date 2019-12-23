@@ -50,16 +50,20 @@ func multiPutToUFile(workerID int, ch <-chan FileInfo, wg *sync.WaitGroup, rwMut
 		if err != nil {
 			logger.Printf("workerID: %d, download fail from qiniu: %s", workerID, err.Error())
 		} else {
-			rwMutex.Lock()
-			if _, ok := ucache.Ufilecache[fileInfo.fileName]; ok {
-				logger.Printf("workerID: %d, fileName:%s is already in cache", workerID, fileInfo.fileName)
-			} else {
-				uploadToUFile(workerID, resp.Body, fileInfo.fileName)
+			logger.Printf("start download from qiniu url is : %s,status: %d ", fileInfo.qiniuDownloadUrl, resp.StatusCode)
+			if resp.StatusCode == 200 {
+				rwMutex.Lock()
+				if _, ok := ucache.Ufilecache[fileInfo.fileName]; ok {
+					logger.Printf("workerID: %d, fileName:%s is already in cache", workerID, fileInfo.fileName)
+				} else {
+					uploadToUFile(workerID, resp.Body, fileInfo.fileName)
 
-				ucache.Ufilecache[fileInfo.fileName] = true
+					ucache.Ufilecache[fileInfo.fileName] = true
 
+				}
+				rwMutex.Unlock()
 			}
-			rwMutex.Unlock()
+
 
 		}
 		if resp != nil {
