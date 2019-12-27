@@ -44,6 +44,11 @@ func fileExists(filename string) bool {
 
 
 func multiPutToUFile(workerID int, ch <-chan FileInfo, wg *sync.WaitGroup, rwMutex *sync.RWMutex, ucache *UfileCache) {
+	defer func() {
+		if err := recover(); err != nil {
+			logger.Infof("Recovered in :multiPutToUFile,", workerID)
+		}
+	}()
 	defer wg.Done()
 	for fileInfo := range ch {
 		resp, err := http.Get(fileInfo.qiniuDownloadUrl)
@@ -78,6 +83,11 @@ func multiPutToUFile(workerID int, ch <-chan FileInfo, wg *sync.WaitGroup, rwMut
 }
 
 func uploadToUFile(workerID int, uploadFileReader io.Reader, remoteFileKey string) {
+	defer func() {
+		if err := recover(); err != nil {
+			logger.Infof("Recovered in uploadToUFile:,", remoteFileKey)
+		}
+	}()
 	config := &ufsdk.Config{}
 	config.PublicKey = cfg.Ufile.PublicKey
 	config.PrivateKey = cfg.Ufile.PrivateKey
@@ -104,6 +114,11 @@ func uploadToUFile(workerID int, uploadFileReader io.Reader, remoteFileKey strin
 
 // generate downloadUrl from qiniu
 func GenDownloadUrl(key string) (privateUrl string) {
+	defer func() {
+		if err := recover(); err != nil {
+			logger.Infof("Recovered in GenDownloadUrl:,", key)
+		}
+	}()
 	if strings.HasPrefix(key, "/") {
 		key = "@" + key
 	}
@@ -160,6 +175,11 @@ func getFileFromQiniuSourceFile(fileName string, wg *sync.WaitGroup) <- chan Fil
 	return out
 }
 func getFileFromQiniuMetadata( wg *sync.WaitGroup) <- chan FileInfo {
+	defer func() {
+		if err := recover(); err != nil {
+			logger.Infof("Recovered in GenDownloadUrl")
+		}
+	}()
 	out := make(chan FileInfo, 100)
 	mac := qbox.NewMac(cfg.Qiniu.Ak, cfg.Qiniu.Sk)
 	zone := storage.Zone{
